@@ -10,8 +10,8 @@ class App extends React.Component {
   }
 
   componentDidMount = () => {
-    axios.get("/api").then(response=>{
-      console.log(response.data);
+    axios.get("/users").then(response=>{
+      console.log(response);
     });
   }
 
