@@ -1,8 +1,19 @@
 import './App.css';
 import { Form, Modal, Container, Button } from 'react-bootstrap'
 import React from 'react';
+import axios from "axios";
 
 class App extends React.Component {
+  constructor(props){
+    super(props);
+    this.state={apiResponse:""};
+  }
+
+  componentDidMount = () => {
+    axios.get("/api").then(response=>{
+      console.log(response.data);
+    });
+  }
 
   render() {
     return (
