@@ -6,7 +6,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 // var apiRouter = require('./routes/api');
-const { mongoose } = require('mongoose');
+const mongoose = require('mongoose');
 
 var app = express();
 // require('./helpers/initMongo')
@@ -29,10 +29,10 @@ mongoose.connect(mongoDB, {
   useFindAndModify: false,
   useCreateIndex: true,
 });
-mongoose.model('users',{name: String})
+mongoose.model('users',{name: String});
 app.get('/users', function (req,res) {
   mongoose.model('users').find(function(err,users) {
-    res.send(users);
+    res.send({name: "Mihir"});
   });
 });
 
