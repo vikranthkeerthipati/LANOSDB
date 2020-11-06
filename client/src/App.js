@@ -67,7 +67,8 @@ class App extends React.Component {
     console.log(jsonFormat)
     axios.post("/opportunity",jsonFormat)
           .then(response=> {
-      console.log(response);
+            console.log(response);
+            //Add success modal
                          })
           .catch(err => {
             if(err.response.status == 406){
@@ -212,15 +213,12 @@ class App extends React.Component {
         
         <Modal show={this.state.isOpen} onHide={this.handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>Opportunity already exists!</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+        <Modal.Body>Find another one</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={this.handleClose}>
             Close
-          </Button>
-          <Button variant="primary" onClick={this.handleClose}>
-            Save Changes
           </Button>
         </Modal.Footer>
       </Modal>
