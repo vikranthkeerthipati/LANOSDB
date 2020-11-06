@@ -22,14 +22,51 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-var mongoDB = 'mongodb+srv://MihirBafna:MihirBafna@lanoscluster.nindp.mongodb.net/LANOSDB?retryWrites=true&w=majority';
-mongoose.connect(mongoDB, {
+var mongoURL = 'mongodb+srv://MihirBafna:MihirBafna@lanoscluster.nindp.mongodb.net/LANOSDB?retryWrites=true&w=majority';
+mongoose.connect(mongoURL, {
+  dbName: 'LANOSdb',
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,
   useCreateIndex: true,
 });
-mongoose.model('users',{name: String});
+mongoose.model('users',{
+  name: String,
+
+});
+var opportunitySchema = mongoose.Schema({
+  opp_name: String,
+  org_name: String,
+  opp_type: [String],
+  email: String,
+  location_type: String,
+  location: String,
+  link: String,
+  start_date: String,
+  end_date: String,
+  description: String,
+  min_age: Number
+
+});
+
+const Opportunity = mongoose.model('volunteeropps',opportunitySchema);
+
+app.post('/opportunity', function(req,res){
+  if(!Opportunity.exists({opp_name: req.body.opp_name})){
+  const data = new Opportunity(req.body);
+  
+  data.save(function(err){
+    if(err){
+      return console.error(err);
+    }
+  })
+  console.log("hello");
+}
+else{
+  console.log("loser")
+}
+})
+
 app.get('/users', function (req,res) {
   mongoose.model('users').find(function(err,users) {
     res.send({name: "Mihir"});

@@ -14,13 +14,46 @@ class App extends React.Component {
   handleSubmit(event){
     event.preventDefault();
     let formElements = event.target.elements;
+    console.log(formElements)
     let oppName = formElements.formOpportunityName.value;
     let orgName = formElements.formOrgName.value;
     let contactEmail = formElements.formOrgEmail.value;
-    console.log(formElements)
-    // let checkboxes = formElements.formOppType;
-
-
+    
+    function calcCheckboxes(){
+      let result = [];
+      for(let i = 0; i < formElements.length;i++){
+        if(formElements[i].type === "checkbox"){
+            if(formElements[i].checked){
+              result.push(formElements[i].value)
+            }
+        }
+      }
+      return result;
+    }
+    let opportunityType = calcCheckboxes();
+    let locationType = formElements.formLocType.value;
+    let location = formElements.formLocation.value;
+    let link = formElements.formLink.value;
+    let startDate = formElements.formStartDate.value;
+    let endDate = formElements.formEndDate.value;
+    let description = formElements.formDesc.value;
+    let min_age = formElements.formMinAge.value;
+    let jsonFormat = new Object();
+    jsonFormat.opp_name = oppName;
+    jsonFormat.org_name = orgName;
+    jsonFormat.opp_type = opportunityType;
+    jsonFormat.email = contactEmail;
+    jsonFormat.location_type = locationType;
+    jsonFormat.location = location;
+    jsonFormat.link = link;
+    jsonFormat.start_date = startDate;
+    jsonFormat.end_date = endDate;
+    jsonFormat.description = description;
+    jsonFormat.min_age = min_age;
+    console.log(jsonFormat)
+    axios.post("/opportunity",jsonFormat).then(response=> {
+      console.log(response);
+    })
 
 
   }
@@ -44,59 +77,59 @@ class App extends React.Component {
               <Container style={{ textAlign: "left" }}>
                 <Form.Group controlId="formOpportunityName">
                   <Form.Label>Opportunity Name</Form.Label>
-                  <Form.Control required type="text" placeholder="Enter name" />
+                  <Form.Control type="text" placeholder="Enter name" />
                 </Form.Group>
                 <Form.Group controlId="formOrgName">
                   <Form.Label>Organziation Name</Form.Label>
-                  <Form.Control required type="text" placeholder="Enter organization" />
+                  <Form.Control type="text" placeholder="Enter organization" />
                 </Form.Group>
                 <Form.Group controlId="formOrgEmail">
                   <Form.Label>Contact Email</Form.Label>
-                  <Form.Control required type="email" placeholder="email@example.com"></Form.Control>
+                  <Form.Control type="email" placeholder="email@example.com"></Form.Control>
                 </Form.Group>
                 <Form.Group controlId="formOppType">
                   <Form.Label>Type of Opportunity/Opportunities</Form.Label>
                   <Row>
                   <Col>
-                  <Form.Check type="checkbox" label="Poverty Support" id = "pos"/>
+                  <Form.Check type="checkbox" label="Poverty Support" value="Poverty Support"/>
                   </Col>
                   <Col>
-                  <Form.Check type="checkbox" label="Religious-Based Service" id="rbs"/>
+                  <Form.Check type="checkbox" label="Religious-Based Service" value="Religious-Based Service"/>
                   </Col>
                   </Row>
                   <Row>
                     <Col>
-                    <Form.Check type="checkbox" label="Environmental Advocacy" id="ea"/>
+                    <Form.Check type="checkbox" label="Environmental Advocacy" value="Environmental Advocacy"/>
                     </Col>
                     <Col>
-                    <Form.Check type="checkbox" label="Animal Shelters" id="as"/>
+                    <Form.Check type="checkbox" label="Animal Shelters" value="Animal Shelters"/>
                     </Col>
                   </Row>
                   <Row>
                     <Col>
-                  <Form.Check type="checkbox" label="Support Groups" id="sg"/>
+                  <Form.Check type="checkbox" label="Support Groups" value="Support Groups"/>
                   </Col>
                   <Col>
-                  <Form.Check type="checkbox" label="LGBTQ+ Outreach" id="lo"/>
+                  <Form.Check type="checkbox" label="LGBTQ+ Outreach" value="LGBTQ+ Outreach"/>
                   </Col>
                   </Row>
                   <Row>
                     <Col>
-                  <Form.Check type="checkbox" label="Disaster Relief" id="rf"/>
+                  <Form.Check type="checkbox" label="Disaster Relief" value="Disaster Relief"/>
                   </Col>
                   <Col>
-                  <Form.Check type="checkbox" label="Political/Social Advocacy" id="psa"/>
+                  <Form.Check type="checkbox" label="Political/Social Advocacy" value="Political/Social Advocacy"/>
                   </Col>
                   </Row>
                   <Row>
                     <Col>
-                  <Form.Check type="checkbox" label="Minority Groups" id="mg"/>
+                  <Form.Check type="checkbox" label="Minority Groups" value="Minority Groups" />
                     </Col>
                   </Row>
                 </Form.Group>
                 <Form.Group controlId="formLocType">
                   <Form.Label>Location Type</Form.Label>
-                  <Form.Control required as="select">
+                  <Form.Control as="select">
                     <option>Virtual</option>
                     <option>In-Person</option>
                     <option>Both</option>
@@ -110,19 +143,23 @@ class App extends React.Component {
                   <Form.Label>Link</Form.Label>
                   <Form.Control type="link" placeholder="https://www.example.com"></Form.Control>
                 </Form.Group>
-                <Form.Group controlId="formDate">
                   <Form.Label>Select Date Range</Form.Label>
                   <Row>
                     <Col>
+                    <Form.Group controlId="formStartDate">
+
                       <Form.Text muted>Start</Form.Text>
                       <Form.Control type="date" placeholder="MM/DD/YYYY"></Form.Control>
+                      </Form.Group>
                     </Col>
                     <Col>
+                    <Form.Group controlId="formEndDate">
+
                     <Form.Text muted>End</Form.Text>
                       <Form.Control type="date" placeholder="MM/DD/YYYY"></Form.Control>
+                    </Form.Group>
                     </Col>
                   </Row>
-                </Form.Group>
                 <Form.Group controlId="formDesc">
                   <Form.Label>Description</Form.Label>
                   <Form.Control as="textarea" placeholder="Description"></Form.Control>
