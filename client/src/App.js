@@ -43,7 +43,7 @@ class App extends React.Component {
     jsonFormat.org_name = orgName;
     jsonFormat.opp_type = opportunityType;
     jsonFormat.email = contactEmail;
-    jsonFormat.location_type = locationType;
+    jsonFormat.location_type = locationType.toLowerCase();
     jsonFormat.location = location;
     jsonFormat.link = link;
     jsonFormat.start_date = startDate;

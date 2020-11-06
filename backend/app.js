@@ -51,8 +51,18 @@ var opportunitySchema = mongoose.Schema({
 
 const Opportunity = mongoose.model('volunteeropps',opportunitySchema);
 
+
 app.post('/opportunity', function(req,res){
-  if(!Opportunity.exists({opp_name: req.body.opp_name})){
+  let valid = false;
+  Opportunity.exists({opp_name: req.body.opp_name}, function (err, doc){
+    if(err){
+      console.log(err);
+    }
+    else{
+      valid = !doc;
+    }
+  })
+  if(valid){
   const data = new Opportunity(req.body);
   
   data.save(function(err){
@@ -61,7 +71,7 @@ app.post('/opportunity', function(req,res){
     }
   })
   console.log("hello");
-}
+} 
 else{
   console.log("loser")
 }
