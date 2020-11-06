@@ -2,13 +2,27 @@ import './App.css';
 import { Row, Col, Form, Modal, Container, Button, FormControl } from 'react-bootstrap'
 import React from 'react';
 import axios from "axios";
-
+//Need to add error modal if there is an opportunity already in database
 
 class App extends React.Component {
   constructor(props){
     super(props);
-    this.state={apiResponse:""};
+    this.state={apiResponse:"", isOpen:false};
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+    this.handleOpen = this.handleOpen.bind(this)
+  }
+  
+  handleOpen(){
+    this.setState({
+      isOpen: true
+    })
+  }
+
+  handleClose(){
+    this.setState({
+      isOpen: false
+    })
   }
 
   handleSubmit(event){
@@ -51,12 +65,21 @@ class App extends React.Component {
     jsonFormat.description = description;
     jsonFormat.min_age = min_age;
     console.log(jsonFormat)
-    axios.post("/opportunity",jsonFormat).then(response=> {
+    axios.post("/opportunity",jsonFormat)
+          .then(response=> {
       console.log(response);
-    })
+                         })
+          .catch(err => {
+            if(err.response.status == 406){
+              console.log("headass");
+              this.handleOpen();
+            }
+          })
+
 
 
   }
+
 
   // componentDidMount = () => {
   //   axios.get("/users").then(response=>{
@@ -186,6 +209,21 @@ class App extends React.Component {
             </Modal.Footer>
           </Form>
         </Modal.Dialog>
+        
+        <Modal show={this.state.isOpen} onHide={this.handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Modal heading</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={this.handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={this.handleClose}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
 
       </div>
     );
