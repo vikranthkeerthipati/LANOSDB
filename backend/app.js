@@ -60,21 +60,22 @@ app.post('/opportunity', function(req,res){
     }
     else{
       valid = !doc;
-    }
-  })
-  if(valid){
-  const data = new Opportunity(req.body);
+      if(valid){
+      const data = new Opportunity(req.body);
   
-  data.save(function(err){
-    if(err){
-      return console.error(err);
+      data.save(function(err){
+        if(err){
+          return console.error(err);
+        }
+        console.log("hello");
+      })
     }
-  })
-  console.log("hello");
-} 
-else{
-  console.log("loser")
-}
+    else{
+      console.log("loser");
+    }
+  }
+  });
+  
 })
 
 app.get('/users', function (req,res) {

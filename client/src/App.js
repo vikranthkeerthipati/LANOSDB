@@ -77,15 +77,15 @@ class App extends React.Component {
               <Container style={{ textAlign: "left" }}>
                 <Form.Group controlId="formOpportunityName">
                   <Form.Label>Opportunity Name</Form.Label>
-                  <Form.Control type="text" placeholder="Enter name" />
+                  <Form.Control required type="text" placeholder="Enter name" />
                 </Form.Group>
                 <Form.Group controlId="formOrgName">
                   <Form.Label>Organziation Name</Form.Label>
-                  <Form.Control type="text" placeholder="Enter organization" />
+                  <Form.Control required type="text" placeholder="Enter organization" />
                 </Form.Group>
                 <Form.Group controlId="formOrgEmail">
                   <Form.Label>Contact Email</Form.Label>
-                  <Form.Control type="email" placeholder="email@example.com"></Form.Control>
+                  <Form.Control required type="email" placeholder="email@example.com"></Form.Control>
                 </Form.Group>
                 <Form.Group controlId="formOppType">
                   <Form.Label>Type of Opportunity/Opportunities</Form.Label>
@@ -129,7 +129,7 @@ class App extends React.Component {
                 </Form.Group>
                 <Form.Group controlId="formLocType">
                   <Form.Label>Location Type</Form.Label>
-                  <Form.Control as="select">
+                  <Form.Control required as="select">
                     <option>Virtual</option>
                     <option>In-Person</option>
                     <option>Both</option>
@@ -137,11 +137,11 @@ class App extends React.Component {
                 </Form.Group>
                 <Form.Group controlId="formLocation">
                   <Form.Label>Location</Form.Label>
-                  <Form.Control type="text" placeholder="Atlanta, GA"></Form.Control>
+                  <Form.Control required type="text" placeholder="Atlanta, GA"></Form.Control>
                 </Form.Group>
                 <Form.Group controlId="formLink">
                   <Form.Label>Link</Form.Label>
-                  <Form.Control type="link" placeholder="https://www.example.com"></Form.Control>
+                  <Form.Control required type="link" placeholder="https://www.example.com"></Form.Control>
                 </Form.Group>
                   <Form.Label>Select Date Range</Form.Label>
                   <Row>
@@ -149,20 +149,20 @@ class App extends React.Component {
                     <Form.Group controlId="formStartDate">
 
                       <Form.Text muted>Start</Form.Text>
-                      <Form.Control type="date" placeholder="MM/DD/YYYY"></Form.Control>
+                      <Form.Control required type="date" placeholder="MM/DD/YYYY"></Form.Control>
                       </Form.Group>
                     </Col>
                     <Col>
                     <Form.Group controlId="formEndDate">
 
                     <Form.Text muted>End</Form.Text>
-                      <Form.Control type="date" placeholder="MM/DD/YYYY"></Form.Control>
+                      <Form.Control required type="date" placeholder="MM/DD/YYYY"></Form.Control>
                     </Form.Group>
                     </Col>
                   </Row>
                 <Form.Group controlId="formDesc">
                   <Form.Label>Description</Form.Label>
-                  <Form.Control as="textarea" placeholder="Description"></Form.Control>
+                  <Form.Control required as="textarea" placeholder="Description"></Form.Control>
                 </Form.Group>
                 <Form.Group controlId="formMinAge">
                   <Form.Label>Minimum Age</Form.Label>
