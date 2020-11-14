@@ -66,6 +66,8 @@ class App extends React.Component {
     jsonFormat.description = description;
     jsonFormat.min_age = min_age;
     console.log(jsonFormat)
+
+
     axios.post("http://34.201.174.195:9000/opportunity",jsonFormat)
           .then(response=> {
             console.log(response);
