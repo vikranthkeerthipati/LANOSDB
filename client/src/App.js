@@ -44,6 +44,7 @@ class App extends React.Component {
       }
       return result;
     }
+
     let opportunityType = calcCheckboxes();
     let locationType = formElements.formLocType.value;
     let location = formElements.formLocation.value;
@@ -65,7 +66,7 @@ class App extends React.Component {
     jsonFormat.description = description;
     jsonFormat.min_age = min_age;
     console.log(jsonFormat)
-    axios.post("/opportunity",jsonFormat)
+    axios.post("http://34.201.174.195:9000/opportunity",jsonFormat)
           .then(response=> {
             console.log(response);
             //Add success modal
