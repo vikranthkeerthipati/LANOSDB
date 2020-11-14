@@ -55,8 +55,8 @@ const Opportunity = mongoose.model('volunteeropps',opportunitySchema);
 
 
 app.post('/opportunity', function(req,res){
-  console.log(req);
   let valid = false;
+  console.log(req);
   Opportunity.exists({opp_name: req.body.opp_name}, function (err, doc){
     if(err){
       console.log(err);
