@@ -2,7 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://lanosops.github.io/LANOSDB",
+  "homepage": "https://lanosops.github.io/LANOSDB",
   "dependencies": {
     "@rjsf/bootstrap-4": "^2.4.0",
     "@rjsf/core": "^2.4.0",
