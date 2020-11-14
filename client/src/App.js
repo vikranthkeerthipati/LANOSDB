@@ -72,7 +72,7 @@ class App extends React.Component {
             //Add success modal
                          })
           .catch(err => {
-            if(err.response.status == 406){
+            if(err.response.status == 201){
               console.log("headass");
               this.handleOpen();
             }

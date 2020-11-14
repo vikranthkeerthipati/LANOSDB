@@ -74,7 +74,7 @@ app.post('/opportunity', function(req,res){
       })
     }
     else{
-      res.sendStatus(406);
+      res.sendStatus(201);
       console.log("loser");
     }
   }
